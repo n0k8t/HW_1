@@ -132,6 +132,12 @@ struct MyList
             return tmp;
         } *///постфиксный вариант
 
+        iterator &operator-- ()
+        {
+            pNode = pNode->pPrev;
+            return (*this);
+        }    
+            
         bool operator!=(iterator &Obj)
         {
             return *pNode != Obj.pNode;
@@ -317,6 +323,15 @@ struct MyList
     {
         std::swap(pFirst,other.pFirst);
     }
+        
+    iterator insert( iterator pos, const Value& value )
+    {
+        Node *tmp = new Node;
+        tmp->pNext = pos.pNode->pNext;
+        tmp->pPrev = pos.pNode;
+        tmp->val = value;
+        pos.pNode->pNext = tmp;
+    }    
 };
 
 
